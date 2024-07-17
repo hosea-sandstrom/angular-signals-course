@@ -32,8 +32,18 @@ type Counter = {
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  counter = signal<Counter>({
-    value: 100,
+  // counter = signal<Counter>({
+  //   value: 100,
+  // });
+  counter = signal(0);
+
+  tenXCounter = computed(() => {
+    const val = this.counter();
+    return val * 10;
+  });
+  hunredXCounter = computed(() => {
+    const val = this.tenXCounter();
+    return val * 10;
   });
 
   values = signal<number[]>([0]);
@@ -46,11 +56,11 @@ export class HomeComponent {
     // this.counter++;
     // this.counter.set(this.counter() + 1);
     // this.counter.update((counter) => counter + 1);
-
     //DO NOT MUATATE THE VALUE DIRECTLY; EMIT A NEW VALUE
-    this.counter.update((counter) => ({
-      ...counter,
-      value: counter.value + 1,
-    }));
+    // this.counter.update((counter) => ({
+    //   ...counter,
+    //   value: counter.value + 1,
+    // }));
+    this.counter.update((val) => val + 1);
   }
 }
